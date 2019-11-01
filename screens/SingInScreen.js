@@ -4,6 +4,11 @@ import {
     Button 
 } from 'react-native';
 
+/**
+ * Import Session to access authorize method.
+ */
+import { Session } from '../store';
+
 export default class SignInScreen extends React.Component {
   static navigationOptions = {
     title: 'Please sign in',
@@ -18,7 +23,11 @@ export default class SignInScreen extends React.Component {
   }
 
   _signInAsync = async () => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('App');
-  };
+    Session.authorize()
+      .then(credentials => {
+        debugger
+      })
+      .catch(console.error)
+  }
+  // this.props.navigation.navigate('App');
 }
